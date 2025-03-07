@@ -1,24 +1,51 @@
 public class Main {
     public static void main(String[] args) {
-        // Создаём массив 4x4 с числами
-        String[][] array = {
-                {"1", "2", "3", "4"},
-                {"5", "6", "7", "8"},
-                {"9", "10", "11", "12"},
-                {"13", "14", "15", "16"}
+        // Пример без ошибок
+        System.out.println("Пример без ошибок:");
+
+        String[][] correctArray = {
+            {"1", "2", "3", "4"},
+            {"5", "6", "7", "8"},
+            {"9", "10", "11", "12"},
+            {"13", "14", "15", "16"}
         };
 
         try {
-            // Вызываем метод и получаем сумму
-            int sum = ArrayProcessor.processArray(array);
+            int sum = ArrayProcessor.processArray(correctArray);
             System.out.println("Сумма элементов массива: " + sum);
         } catch (MyArraySizeException e) {
-            // Если массив не 4x4
             System.err.println("Ошибка: " + e.getMessage());
         } catch (MyArrayDataException e) {
-            // Если в массиве неправильные данные
             System.err.println("Ошибка: " + e.getMessage() + " (строка " + e.getRow() + ", столбец " + e.getCol() + ")");
         }
+
+        // Пример с ошибкой в данных
+        System.out.println("\nПример с ошибкой в данных:");
+
+        String[][] incorrectArray = {
+            {"1", "2", "3", "4"},
+            {"5", "6", "7", "8"},
+            {"9", "10", "11", "12"},
+            {"13", "14", "ABC", "16"} // Здесь ошибка
+        };
+
+        try {
+            int sum = ArrayProcessor.processArray(incorrectArray);
+            System.out.println("Сумма элементов массива: " + sum);
+        } catch (MyArraySizeException e) {
+            System.err.println("Ошибка: " + e.getMessage());
+        } catch (MyArrayDataException e) {
+            System.err.println("Ошибка: " + e.getMessage() + " (строка " + e.getRow() + ", столбец " + e.getCol() + ")");
+        }
+
+        // Пример с ошибкой ArrayIndexOutOfBoundsException
+        System.out.println("\nПример с ошибкой ArrayIndexOutOfBoundsException:");
+
+        try {
+            int[] arr = new int[5];
+            System.out.println(arr[10]); // Попытка доступа к несуществующему индексу
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.err.println("Ошибка: выход за пределы массива. " + e.getMessage());
+        }
     }
-    
 }
