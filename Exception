@@ -1,0 +1,31 @@
+public class Exception extends RuntimeException {
+    public Exception(String message) {
+        super(message);
+    }
+}
+// Исключение для неправильного размера массива
+class MyArraySizeException extends Exception {
+    public MyArraySizeException(String message) {
+        super(message);
+    }
+}
+
+// Исключение для неправильных данных в массиве
+class MyArrayDataException extends Exception {
+    private int row; // Строка, где ошибка
+    private int col; // Столбец, где ошибка
+
+    public MyArrayDataException(String message, int row, int col) {
+        super(message);
+        this.row = row;
+        this.col = col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+}
