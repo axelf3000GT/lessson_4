@@ -1,0 +1,27 @@
+public class ArrayProcessor {
+
+    // Метод, который обрабатывает массив
+    public static int processArray(String[][] array) throws MyArraySizeException, MyArrayDataException {
+        // Проверяем, что массив 4x4
+        if (array.length != 4 || array[0].length != 4) {
+            throw new MyArraySizeException("Массив должен быть 4x4!");
+        }
+
+        int sum = 0; // Переменная для суммы
+
+        // Проходим по всем элементам массива
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                try {
+                    // Пробуем преобразовать строку в число и добавить к сумме
+                    sum += Integer.parseInt(array[i][j]);
+                } catch (NumberFormatException e) {
+                    // Если не получилось, бросаем исключение
+                    throw new MyArrayDataException("Ошибка в ячейке [" + i + "][" + j + "]", i, j);
+                }
+            }
+        }
+
+        return sum; // Возвращаем сумму
+    }
+}
