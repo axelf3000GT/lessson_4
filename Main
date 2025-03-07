@@ -1,0 +1,24 @@
+public class Main {
+    public static void main(String[] args) {
+        // Создаём массив 4x4 с числами
+        String[][] array = {
+                {"1", "2", "3", "4"},
+                {"5", "6", "7", "8"},
+                {"9", "10", "11", "12"},
+                {"13", "14", "15", "16"}
+        };
+
+        try {
+            // Вызываем метод и получаем сумму
+            int sum = ArrayProcessor.processArray(array);
+            System.out.println("Сумма элементов массива: " + sum);
+        } catch (MyArraySizeException e) {
+            // Если массив не 4x4
+            System.err.println("Ошибка: " + e.getMessage());
+        } catch (MyArrayDataException e) {
+            // Если в массиве неправильные данные
+            System.err.println("Ошибка: " + e.getMessage() + " (строка " + e.getRow() + ", столбец " + e.getCol() + ")");
+        }
+    }
+    
+}
